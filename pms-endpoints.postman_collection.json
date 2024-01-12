@@ -1,0 +1,711 @@
+{
+	"info": {
+		"_postman_id": "fb781e96-bfa2-4241-9f7c-afc62801d44b",
+		"name": "pms-endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24712241",
+		"_collection_link": "https://galactic-crescent-866513.postman.co/workspace/PSM-MICROSEVICE~b189b74e-1f4e-4913-88fe-75d232f3149e/collection/24712241-fb781e96-bfa2-4241-9f7c-afc62801d44b?action=share&source=collection_link&creator=24712241"
+	},
+	"item": [
+		{
+			"name": "Filter By",
+			"item": [
+				{
+					"name": "Order by sku (ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=id&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by sku",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sku=2",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sku",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?price=19.9",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "price",
+									"value": "19.9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by price range greater than or equal to",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?minPrice=11",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by price range less than or equal to",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?maxPrice=6",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "maxPrice",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by price range between",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?minPrice=10&maxPrice=17",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "10"
+								},
+								{
+									"key": "maxPrice",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by price range between and order asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?minPrice=10&maxPrice=17&sort=price&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "10"
+								},
+								{
+									"key": "maxPrice",
+									"value": "17"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filte by last updated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?lastUpdated=2024-01-10",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "lastUpdated",
+									"value": "2024-01-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filte by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?title=Pizza Margherita Royal Updated3",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Pizza Margherita Royal Updated3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filte by In Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?stock=In%20Stock",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "stock",
+									"value": "In%20Stock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Out Of Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?stock=Out%20Of%20Stock",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "stock",
+									"value": "Out%20Of%20Stock"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order By",
+			"item": [
+				{
+					"name": "Order by price  desc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=price&order=desc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by name desc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=title&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "title"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by name asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=title&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "title"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by price asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=price&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by sku asc (ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=id&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by sku desc (ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=id&order=desc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by last update",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=lastUpdated&order=desc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "lastUpdated"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by first update",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=lastUpdated&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "lastUpdated"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by In Stock desc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=stock&order=desc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "stock"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order by In Stock asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}?sort=stock&order=asc",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "stock"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sell Products",
+			"item": [
+				{
+					"name": "Sell Produsts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productsSold\": [\n        { \"id\": 8, \"quantity\": 2 },\n        { \"id\": 4, \"quantity\": 6 }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/products/sell",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"sell"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Product availability by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}/check-availability?id=6",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"path": [
+								"check-availability"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Product availability by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}/check-availability?title=Pepperoni%20Pizza",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"path": [
+								"check-availability"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Pepperoni%20Pizza"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products Recomendations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}/recommendations/10",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"path": [
+								"recommendations",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Frequently bought together Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PMS-URL}}/frequently-bought-together",
+							"host": [
+								"{{PMS-URL}}"
+							],
+							"path": [
+								"frequently-bought-together"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List all Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PMS-URL}}",
+					"host": [
+						"{{PMS-URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all Products with limit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PMS-URL}}?page=1&limit=5",
+					"host": [
+						"{{PMS-URL}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import pms Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/merci4dev/pms-microservice/italian_restaurant.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{PMS-URL}}/import",
+					"host": [
+						"{{PMS-URL}}"
+					],
+					"path": [
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"quantity\": 10\n   \n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PMS-URL}}/10",
+					"host": [
+						"{{PMS-URL}}"
+					],
+					"path": [
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
