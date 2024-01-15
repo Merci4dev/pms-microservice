@@ -1,16 +1,6 @@
-
-import { Product, ProductPair } from '../models/Products.js';
-import csvParser from 'csv-parser';
 import fs from 'fs';
-
-/**
- * A utility function for handling error responses.
- * It logs the error and sends a response to the client with the specified status code and error message.
-*/
-function handleErrorResponse(res, error, message = 'Se ha producido un error', statusCode = 500) {
-    console.error(message, error);
-    res.status(statusCode).json({ error: message });
-}
+import csvParser from 'csv-parser';
+import { Product, ProductPair } from '../models/Products.model.js';
 
 /**
  * This class contains static methods for handling product-related HTTP requests.
@@ -18,7 +8,7 @@ function handleErrorResponse(res, error, message = 'Se ha producido un error', s
  * The methods in this class use the 'Product' model to interact with the database and respond to client requests.
 */
 export class ProductController {
-
+ 
     /**
      * This method imports products from a CSV file. It reads the CSV file using a stream and parses the data.
      * Products are validated, and if they meet the criteria, they are added to the 'products' array.
@@ -27,8 +17,8 @@ export class ProductController {
      * If some products already exist in the database, they are not inserted to prevent duplicates.
      * After processing, it responds with a success message or an error message if any issues were encountered.
     */
-    static importProducts(req, res) {
-
+    static importProducts (req, res) {
+        
         const products = [];
         let errorOcurred = false; 
     
@@ -58,7 +48,9 @@ export class ProductController {
                         });
                 }
             });
+
     }
+
 
     /**
      * This method retrieves a list of products based on various query parameters such as title, price, stock, etc.
@@ -105,9 +97,9 @@ export class ProductController {
         .limit(limitNum) 
         .then(products => res.status(200).json(products))
         .catch((error) => handleErrorResponse(res, error, 'Error inserting products in the database'));
-
     }
-
+    
+    
     /**
      * This method updates a product's information based on the provided product ID and update data.
      * It first tries to find the product by its ID, and if it exists, it updates its information.
@@ -115,7 +107,7 @@ export class ProductController {
      * If the update is successful, it responds with a 200 status and the updated product information.
      * If there's an error during the update, it responds with a 500 Internal Server Error and includes the error message.
     */
-    static async updateProduct(req, res) {
+    static async updateProduct (req, res) {
         const { id } = req.params;
         const updateData = req.body;
 
@@ -135,7 +127,8 @@ export class ProductController {
             res.status(500).json({ error: error.message });
         }
     }
-
+  
+    
     /**
      * This method handles the sale of products. It takes an array of products to be sold as input.
      * For each product in the list, it checks if the product exists and has sufficient stock.
@@ -145,7 +138,7 @@ export class ProductController {
      * It responds with a 200 OK status if the sale is processed successfully.
      * If there's an error during the process, it responds with a 500 Internal Server Error and includes the error message.
     */
-    static async sellProducts(req, res) {
+    static async sellProducts (req, res) {
         const { productsSold } = req.body; 
     
         async function registerProductsBoughtTogether(productsSold) {
@@ -198,7 +191,8 @@ export class ProductController {
             res.status(500).json({ error: error.message });
         }
     }
-    
+
+ 
     /**
      * This method retrieves product recommendations based on the ID of a given product.
      * It searches for product pairs in the database where the specified product is involved.
@@ -208,27 +202,44 @@ export class ProductController {
      * If there's an error during the process, it responds with a 500 Internal Server Error and includes the error message.
     */
     static async getProductRecommendations(req, res) {
-     
         const id = parseInt(req.params.id);
-
+    
+        // Validar que id es un número
+        if (isNaN(id)) {
+            return res.status(400).json({ error: "Invalid product ID" });
+        }
+    
         try {
             const pairs = await ProductPair.find({ products: id }).sort({ frequency: -1 }).limit(5);
-            const recommendedProductIds = pairs.map(pair => pair.products.find(pId => pId !== id));
-            const recommendedProducts = await Product.find({ id: { $in: recommendedProductIds } });
-
+    
+            // Extraer todos los IDs recomendados, excluyendo el ID original
+            const recommendedProductIds = pairs.flatMap(pair => pair.products).filter(pId => pId !== id);
+    
+            // Eliminar duplicados
+            const uniqueRecommendedProductIds = [...new Set(recommendedProductIds)];
+    
+            // Verificar si hay IDs recomendados
+            if (uniqueRecommendedProductIds.length === 0) {
+                return res.status(404).json({ message: "No recommendations found for this product" });
+              }
+    
+            const recommendedProducts = await Product.find({ id: { $in: uniqueRecommendedProductIds } });
+    
             res.status(200).json(recommendedProducts);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            console.error(error); // Para propósitos de depuración
+            res.status(500).json({ error: "Internal server error", details: error.message });
         }
     }
-
+    
+    
     /**
      * This method checks the availability of a product by either its ID or title.
      * It queries the database and responds with a JSON message indicating whether the product is available or not.
      * If the product is not found, it responds with a 404 Not Found status and an appropriate message.
      * If there's an error during the process, it responds with a 500 Internal Server Error and includes the error message.
     */
-    static async checkProductAvailability(req, res) {
+    static async checkProductAvailability (req, res) {
         const { id, title } = req.query;
 
         try {
@@ -251,13 +262,14 @@ export class ProductController {
             res.status(500).json({ error: error.message });
         }
     }
- 
+
+
     /**
      * This method retrieves frequently bought together product pairs from the database and returns them as JSON.
      * If there's an error during the process, it logs the error and responds with a 500 Internal Server Error.
     */
-    static async getFrequentlyBoughtTogetherProducts(req, res) {
-        try {
+    static async getFrequentlyBoughtTogetherProducts (req, res) {
+       try {
           const pairs = await ProductPair.find().sort({ frequency: -1 }).limit(10);
           res.status(200).json({ pairs });
        
@@ -266,8 +278,5 @@ export class ProductController {
           res.status(500).json({ error: 'Internal server error' });
         }
     }
-    
+
 }
-
-
-

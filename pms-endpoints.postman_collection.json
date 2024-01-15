@@ -40,14 +40,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{PMS-URL}}?sku=2",
+							"raw": "{{PMS-URL}}?sku=10",
 							"host": [
 								"{{PMS-URL}}"
 							],
 							"query": [
 								{
 									"key": "sku",
-									"value": "2"
+									"value": "10"
 								}
 							]
 						}
@@ -60,14 +60,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{PMS-URL}}?price=19.9",
+							"raw": "{{PMS-URL}}?price=9.9",
 							"host": [
 								"{{PMS-URL}}"
 							],
 							"query": [
 								{
 									"key": "price",
-									"value": "19.9"
+									"value": "9.9"
 								}
 							]
 						}
@@ -507,7 +507,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"productsSold\": [\n        { \"id\": 8, \"quantity\": 2 },\n        { \"id\": 4, \"quantity\": 6 }\n    ]\n}",
+							"raw": "{\n    \"productsSold\": [\n        { \"id\": 10, \"quantity\": 1 },\n        { \"id\": 1, \"quantity\": 3 }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -539,7 +539,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{PMS-URL}}/check-availability?id=6",
+							"raw": "{{PMS-URL}}/check-availability?id=10",
 							"host": [
 								"{{PMS-URL}}"
 							],
@@ -549,7 +549,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "6"
+									"value": "10"
 								}
 							]
 						}
@@ -585,13 +585,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{PMS-URL}}/recommendations/10",
+							"raw": "{{PMS-URL}}/recommendations/1",
 							"host": [
 								"{{PMS-URL}}"
 							],
 							"path": [
 								"recommendations",
-								"10"
+								"1"
 							]
 						}
 					},
@@ -665,7 +665,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/home/merci4dev/pms-microservice/italian_restaurant.csv"
+							"src": "/home/merci4dev/pms-microservice_2/src/persistence/italian_restaurant.csv"
 						}
 					]
 				},
@@ -688,7 +688,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"quantity\": 10\n   \n}\n",
+					"raw": "{\n   \"quantity\": 0,\n   \"stock\": \"Out Of Stock\"\n\n\n\n   \n   \n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -696,12 +696,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{PMS-URL}}/10",
+					"raw": "{{PMS-URL}}/update/3",
 					"host": [
 						"{{PMS-URL}}"
 					],
 					"path": [
-						"10"
+						"update",
+						"3"
 					]
 				}
 			},

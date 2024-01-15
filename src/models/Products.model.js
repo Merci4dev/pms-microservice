@@ -7,7 +7,7 @@ const { Schema, model } = mongoose;
 const productSchema = new Schema({
     id: Number,
     title: String,
-    quantity: { type: Number, default: 0 },
+    quantity: { type: Number, default: 10 },
     link: String,
     image_link: String,
     ingredients: String,

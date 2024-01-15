@@ -1,24 +1,27 @@
-import { app, database, connectToDatabase } from '../index.js';
 import Server from "../Server.js";
-describe('Index', () => {
-  let server;
+import { app, database, connectToDatabase } from "../Index.js";
 
-  beforeAll(async () => {
-    server = new Server(3000, [], []);
-    await connectToDatabase();
-  });
+jest.mock('chalk', () =>({
+    whiteBright: jest.fn().mockImplementation((text) => text),
+}))
 
-  it('should create an express app', () => {
-    expect(app).toBeDefined();
+
+describe('Index Module', () => {
+    let server;
+  
+    beforeAll(async () => {
+      server = new Server(3000, '127.0.0.1', [], []);
+      await connectToDatabase();
+    });
+  
+    it('should create an express app', () => {
+      expect(app).toBeDefined();
+    })
+
+    afterAll(async () => {
+      server.close();
+      database.disconnect();
+    });
+  
   })
-
-
-  afterAll(async () => {
-    server.close();
-    database.disconnect();
-  });
-
-})
-
-
-
+  

@@ -1,56 +1,82 @@
-
 /**
  * Server class encapsulates the logic for configuring and starting an Express server.
  * It applies middlewares and routes to the Express application.
  * The `listen` method starts the server on the specified port.
- * The structure is clear and modular, making it easy to manage the server and potentially expand it with more middlewares or routes.
- */
+ * This structure is clear and modular, making it easy to manage the server and potentially expand it with more middlewares or routes.
+*/
 
-import express from 'express';
+import express from 'express'
 
 class Server {
-  constructor(port, middlewares, routes) {
-    this.app = express();
-    this.port = port;
-    this.middlewares = middlewares;
-    this.routes = routes;
-  }
+    
+    constructor(port, host, middlewares, routes)
+    {
+        // Validate port
+        if(port < 0 || port > 65535) {
+            throw new Error('Invalid Port Number')
+        }
+        
+        // Validate host
+        if(typeof host !== 'string' || host.trim() === '') {
+            throw new Error('Invalid host')
+        }
 
-  applyMiddleware() {
-    this.middlewares.forEach(middleware => {
-      this.app.use(middleware);
-    });
-  }
+        // Validate middlewares
+        if(!Array.isArray(middlewares) || !middlewares.every(mw => typeof mw === 'function')){
+            throw new Error('Invalid middleware array')
+        }
+    
+        if (!Array.isArray(routes) || !routes.every(route => typeof route.path === 'string')) {
+            throw new Error("Invalid routes array");
+        }
 
-  applyRoutes() {
-    this.routes.forEach(route => {
-      this.app.use(route.path, route.router);
-    });
-  }
-
-  listen() {
-    this.server = this.app.listen(this.port, () => {
-      console.log(`Server is running at http://127.0.0.1:${this.port}`);
-    });
-  }
-
-  close() {
-    if (this.server) {
-      this.server.close();
+        this.app = express();
+        this.host = host;
+        this.port = port;
+        this.middlewares = middlewares;
+        this.routes = routes;
     }
-  }
-  
-  getApp() {
-    return this.app;
-  }
 
+
+    applyMiddleware() {
+        this.middlewares.forEach(middleware => {
+            this.app.use(middleware)
+        });
+    }
+
+
+    applyRoutes() {
+        this.routes.forEach(route => {
+          this.app.use(route.path, route.router);
+        });
+      }
+
+    // Listen the app start
+    listen(callback) {
+        this.server = this.app.listen(this.port, this.host, () => {
+            console.log(`Server is running at http://${this.host}:${this.port}`);
+            if (callback) callback(null);
+        });
+
+        this.server.on('error', (error) => {
+            if (callback) callback(error);
+
+        });
+    }
+
+
+    close() {
+        if(this.server){
+            this.server.close()
+        }
+    }
+
+    getApp () {
+        return this.app
+    }
 }
 
-export default Server;
-
-
-
-
+export default Server
 
 
 
